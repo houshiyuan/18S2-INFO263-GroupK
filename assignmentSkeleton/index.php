@@ -32,16 +32,49 @@ require_once ("database.php");
      <h1 class="mt-5 text-center">INFO263 Assignment 2018!</h1>
    </div>
    <?php
-   $invoiceList = getAllInvoice($conn);
-   printElement($invoiceList);
+   $invoiceList = getAllInvoices($conn);
+   $ownerList = getAllOwners($conn);
+   $vehicleList = getAllVehicles($conn);
+   printInvoice($invoiceList);
+   printOwner($ownerList);
+   printVehicle($vehicleList);
 
-   function printElement($list){
-       //Function for print each element in invoice list.
+
+
+
+
+   function printInvoice($list){
+       //Function for print each element of invoice list.
        for ($i=0; $i < count($list); $i++){
-           echo 'ID: '.$list[$i]->invoice_id.'<br>Description: '.$list[$i]->description.'<br>Quantity: '.$list[$i]->quantity. '<br>Unit Price($): '.$list[$i]->unit_price. '<br><br>';
+           echo 'ID: '.$list[$i]->invoice_id.'<br>Description: '.$list[$i]->description.'<br>Quantity: '.$list[$i]->quantity.'<br>Unit Price($): '.$list[$i]->unit_price.'<br>Owner ID: '.$list[$i]->customer_id.'<br><br>';
 
        }
    }
+
+   function printOwner($list){
+       //Function for print each element of owner list.
+       for ($i=0; $i < count($list); $i++){
+           echo 'Customer Name: '.$list[$i]->owner_fname.' '.$list[$i]->owner_lname.', Customer ID: '.$list[$i]->owner_id.'<br>';
+           echo 'Contact Number: '. $list[$i]->owner_phone.'<br>';
+           echo 'E-mail: '.$list[$i]->owner_email.'<br><br>';
+       }
+
+   }
+
+   function printVehicle($list){
+       //Function for print each element of Vehicle list.
+       for ($i=0; $i < count($list); $i++){
+           echo 'Vehicle ID: '.$list[$i]->vehicle_id.', Customer ID: '.$list[$i]->owner_id.'<br>';
+           echo 'Vehicle Chassis: '.$list[$i]->vehicle_chassis.'<br>';
+           echo 'Make: '.$list[$i]->vehicle_make.' Model: '.$list[$i]->vehicle_model.$list[$i]->vehicle_body_type.'<br>';
+           echo 'Year: '.$list[$i]->vehicle_year.'<br>';
+           echo 'Registration Num: '.$list[$i]->vehicle_registration.'<br>';
+           echo 'Vehicle Odometer: '.$list[$i]->vehicle_odometer_reading.'<br><br>';
+
+       }
+
+   }
+
    ?>
 
 
@@ -59,7 +92,4 @@ require_once ("database.php");
                     crossorigin="anonymous">
    </script>
    <script src="script/scripts.js"></script>
-   <script>
-       pricePlusGST(70);
-   </script>
  </body>

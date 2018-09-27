@@ -10,4 +10,4 @@
     $username = "root";
     $password = "mysql";
     $dbName = "assignment";
-?>
+ ?>
